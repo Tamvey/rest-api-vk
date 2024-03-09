@@ -1,4 +1,4 @@
-package com.test.web.dto;
+package com.test.web.dto.post;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
