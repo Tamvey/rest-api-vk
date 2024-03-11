@@ -23,7 +23,7 @@ public class PostController {
     private String authority;
 
 
-    @Cacheable(value = "posts")
+    @Cacheable(value = "posts", key="#request.getRequestURI()")
     @GetMapping("/api/posts")
     public ResponseEntity<List> getAll(@RequestBody(required = false) Post body,
                                        HttpMethod method,
@@ -33,7 +33,7 @@ public class PostController {
         return new RestTemplate().exchange(uri, method, new HttpEntity<>(body), List.class);
     }
 
-    @Cacheable(value = "posts")
+    @Cacheable(value = "posts", key="#id")
     @GetMapping("/api/posts/{id}")
     public ResponseEntity<Post> getOne(@PathVariable("id") int id,
                                        HttpServletRequest request)
@@ -42,7 +42,7 @@ public class PostController {
         return new ResponseEntity<>(new RestTemplate().getForObject(uri, Post.class), HttpStatus.OK);
     }
 
-    @CachePut(value = "posts")
+    @CachePut(value = "posts", key="#id")
     @PostMapping("/api/posts")
     public ResponseEntity<Post> newPost(@RequestBody Post body,
                                         HttpServletRequest request) throws URISyntaxException {
@@ -50,7 +50,7 @@ public class PostController {
         return new ResponseEntity<>(new RestTemplate().postForObject(uri, body, Post.class), HttpStatus.CREATED);
     }
 
-    @CachePut(value = "posts")
+    @CachePut(value = "posts", key="#id")
     @PutMapping("/api/posts/{id}")
     public ResponseEntity<Post> updatePost(@RequestBody Post body,
                                            @PathVariable("id") int id,
@@ -61,7 +61,7 @@ public class PostController {
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @CacheEvict(value = "posts")
+    @CacheEvict(value = "posts", key="#id")
     @DeleteMapping("/api/posts/{id}")
     public ResponseEntity<Post> deletePost(@RequestBody(required = false) Post body,
                                            @PathVariable("id") int id,
