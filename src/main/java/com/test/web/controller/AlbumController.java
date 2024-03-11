@@ -74,7 +74,6 @@ public class AlbumController {
                                              HttpMethod method,
                                              HttpServletRequest request) throws URISyntaxException {
         URI uri = new URI("https", authority, "/albums/" + id, request.getQueryString(), null);
-        CacheManager cacheManager = (CacheManager) context.getBean("cacheManager");
         return new RestTemplate().exchange(uri, method, new HttpEntity<>(body), Album.class);
     }
 }
