@@ -57,7 +57,8 @@ public class UserController {
                                         HttpMethod method,
                                         HttpServletRequest request) throws URISyntaxException {
         URI uri = new URI("https", authority, "/users/" + id, request.getQueryString(), null);
-        return new RestTemplate().exchange(uri, method, new HttpEntity<>(body), User.class);
+        new RestTemplate().put(uri, body);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     @CacheEvict(value="users")

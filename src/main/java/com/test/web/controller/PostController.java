@@ -52,7 +52,8 @@ public class PostController {
                                             HttpMethod method,
                                             HttpServletRequest request) throws URISyntaxException {
         URI uri = new URI("https", authority, "/posts/" + id, request.getQueryString(), null);
-        return new RestTemplate().exchange(uri, method, new HttpEntity<>(body), Post.class);
+        new RestTemplate().put(uri, body);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     @CacheEvict(value="posts")

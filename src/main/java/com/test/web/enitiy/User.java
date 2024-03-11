@@ -2,7 +2,12 @@ package com.test.web.enitiy;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.io.Serializable;
 
 
 
@@ -23,5 +28,6 @@ public class User {
     private int enabled;
 
     private String email;
+
 }
 

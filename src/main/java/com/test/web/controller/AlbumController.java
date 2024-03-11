@@ -59,7 +59,8 @@ public class AlbumController {
                                            HttpMethod method,
                                            HttpServletRequest request) throws URISyntaxException {
         URI uri = new URI("https", authority, "/albums/" + id, request.getQueryString(), null);
-        return new RestTemplate().exchange(uri, method, new HttpEntity<>(body), Album.class);
+        new RestTemplate().put(uri, body);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
     @CacheEvict(value="albums")
     @DeleteMapping("/api/albums/{id}")
