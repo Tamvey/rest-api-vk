@@ -7,3 +7,15 @@ CREATE TABLE users (
   enabled INT NOT NULL DEFAULT 1,
   email VARCHAR(50) NOT NULL
 );
+
+DROP TABLE IF EXISTS  audit;
+CREATE TABLE audit (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  enabled VARCHAR(50) NOT NULL,
+  date VARCHAR(50) NOT NULL,
+  request_type VARCHAR(50) NOT NULL,
+  endpoint VARCHAR(50) NOT NULL,
+  result VARCHAR(50) NOT NULL
+);
+
